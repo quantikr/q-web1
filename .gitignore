@@ -6,6 +6,8 @@
 
 # testing
 /coverage
+/playwright-report
+/test-results
 
 # next.js
 /.next/
@@ -13,10 +15,13 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+.env*
+!.env.example
 
 # debug
 npm-debug.log*
@@ -26,12 +31,32 @@ yarn-error.log*
 # local env files
 .env*.local
 
-# vercel
-.vercel
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-# storybook
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Storybook
 storybook-static/
+/src/stories/
+
+# Cache
+.cache/
+tsconfig.tsbuildinfo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build artifacts
+~/*

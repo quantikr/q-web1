@@ -22,7 +22,7 @@ test.describe('Home Page', () => {
 
   test('should be responsive', async ({ page }) => {
     await page.goto('/')
-
+    git
     // Test desktop view
     await page.setViewportSize({ width: 1280, height: 720 })
     await expect(page.getByRole('main')).toBeVisible()
