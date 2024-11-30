@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "concurrently \"next dev\" \"yarn storybook\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -28,9 +29,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
-    "next": "14.0.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "14.2.18",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
@@ -59,8 +60,9 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.0.1",
+    "concurrently": "^9.1.0",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3",
+    "eslint-config-next": "14.2.18",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-storybook": "^0.11.1",
@@ -76,6 +78,9 @@
     "storybook": "^8.4.6",
     "tailwindcss": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5"
+    "terser-webpack-plugin": "^5.3.10",
+    "thread-loader": "^4.0.4",
+    "typescript": "^5",
+    "webpack": "^5.96.1"
   }
 }

@@ -5,9 +5,11 @@ const nextConfig = {
   images: {
     domains: [], // Add domains for Image component as needed
   },
-  // Enable experimental features as needed
   experimental: {
-    // Add experimental features here
+    optimizeCss: true,
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 }
 

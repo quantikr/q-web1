@@ -2,6 +2,14 @@
 /node_modules
 /.pnp
 .pnp.js
+
+# yarn berry
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 .yarn/install-state.gz
 
 # testing
@@ -44,6 +52,7 @@ next-env.d.ts
 # Storybook
 storybook-static/
 /src/stories/
+.storybook/.webpack-cache/
 
 # Cache
 .cache/
