@@ -33,63 +33,67 @@ A modern Next.js application with TypeScript, Tailwind CSS, shadcn/ui, and compr
 ### Installation
 
 1. Clone the repository:
-   \`\`\`bash
+
+   ```bash
    git clone <repository-url>
    cd next-new
-   \`\`\`
+   ```
 
 2. Install dependencies:
-   \`\`\`bash
+   ```bash
    yarn install
-   \`\`\`
+   ```
 
 ## Development
 
 ### Running the Application
 
 Start the development server:
-\`\`\`bash
+
+```bash
 yarn dev
-\`\`\`
+```
 
 ### Component Development with Storybook
 
 Storybook provides an isolated environment for developing and testing components.
 
 Start Storybook:
-\`\`\`bash
+
+```bash
 yarn storybook
-\`\`\`
+```
 
 #### Writing Stories
 
 Stories are located in the same directory as their components with the `.stories.tsx` extension.
 
 Example story structure:
-\`\`\`typescript
+
+```typescript
 // button.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from './button'
 
 const meta = {
-title: 'UI/Button',
-component: Button,
-parameters: {
-layout: 'centered',
-},
-tags: ['autodocs'],
+  title: 'UI/Button',
+  component: Button,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
 } satisfies Meta<typeof Button>
 
 export default meta
 type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
-args: {
-children: 'Button',
-variant: 'default',
-},
+  args: {
+    children: 'Button',
+    variant: 'default',
+  },
 }
-\`\`\`
+```
 
 #### Features
 
@@ -103,39 +107,40 @@ variant: 'default',
 ### Testing
 
 Run tests:
-\`\`\`bash
 
+```bash
 # Unit and component tests
-
 yarn test
 
 # End-to-end tests
-
 yarn test:e2e
-\`\`\`
+```
 
 ### Code Quality
 
 Run linting:
-\`\`\`bash
+
+```bash
 yarn lint
-\`\`\`
+```
 
 Format code:
-\`\`\`bash
+
+```bash
 yarn format
-\`\`\`
+```
 
 ### Building for Production
 
 Build the application:
-\`\`\`bash
+
+```bash
 yarn build
-\`\`\`
+```
 
 ## Project Structure
 
-\`\`\`
+```
 ├── .storybook/ # Storybook configuration
 ├── src/
 │ ├── app/ # Next.js app directory
@@ -147,7 +152,7 @@ yarn build
 ├── e2e/ # Playwright tests
 ├── public/ # Static files
 └── package.json
-\`\`\`
+```
 
 ## Component Development Workflow
 
@@ -162,10 +167,10 @@ yarn build
 
 This project uses Conventional Commits. To create a commit:
 
-\`\`\`bash
+```bash
 git add .
 git commit -m "type: description"
-\`\`\`
+```
 
 Types: feat, fix, docs, style, refactor, test, chore
 
@@ -176,8 +181,8 @@ Types: feat, fix, docs, style, refactor, test, chore
 1. Create a new project in Cloudflare Pages
 2. Connect your repository
 3. Configure build settings:
-   - Build command: \`yarn build\`
-   - Build output directory: \`.next\`
+   - Build command: `yarn build`
+   - Build output directory: `.next`
    - Environment variables: Add as needed
 
 ## Contributing
