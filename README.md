@@ -9,6 +9,7 @@ A modern Next.js application with TypeScript, Tailwind CSS, shadcn/ui, and compr
 - 🎯 TypeScript for type safety
 - 🎪 shadcn/ui components
 - 🌙 Dark mode support
+- 📚 Storybook for component development
 - 🧪 Testing Setup:
   - Jest for unit testing
   - React Testing Library for component testing
@@ -42,12 +43,64 @@ A modern Next.js application with TypeScript, Tailwind CSS, shadcn/ui, and compr
    yarn install
    \`\`\`
 
-### Development
+## Development
+
+### Running the Application
 
 Start the development server:
 \`\`\`bash
 yarn dev
 \`\`\`
+
+### Component Development with Storybook
+
+Storybook provides an isolated environment for developing and testing components.
+
+Start Storybook:
+\`\`\`bash
+yarn storybook
+\`\`\`
+
+#### Writing Stories
+
+Stories are located in the same directory as their components with the `.stories.tsx` extension.
+
+Example story structure:
+\`\`\`typescript
+// button.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './button'
+
+const meta = {
+title: 'UI/Button',
+component: Button,
+parameters: {
+layout: 'centered',
+},
+tags: ['autodocs'],
+} satisfies Meta<typeof Button>
+
+export default meta
+type Story = StoryObj<typeof Button>
+
+export const Default: Story = {
+args: {
+children: 'Button',
+variant: 'default',
+},
+}
+\`\`\`
+
+#### Features
+
+- 🎨 Theme-aware components with dark mode support
+- 📝 Auto-generated documentation
+- 🎮 Interactive controls for testing variants
+- 📱 Responsive design testing
+- ♿️ Accessibility checking
+- 🧪 Integration with testing tools
+
+### Testing
 
 Run tests:
 \`\`\`bash
@@ -59,13 +112,6 @@ yarn test
 # End-to-end tests
 
 yarn test:e2e
-\`\`\`
-
-### Building for Production
-
-Build the application:
-\`\`\`bash
-yarn build
 \`\`\`
 
 ### Code Quality
@@ -80,30 +126,48 @@ Format code:
 yarn format
 \`\`\`
 
-### Git Workflow
+### Building for Production
 
-This project uses Conventional Commits. To create a commit:
-
+Build the application:
 \`\`\`bash
-git add .
-yarn commit
+yarn build
 \`\`\`
 
 ## Project Structure
 
 \`\`\`
-├── .github/ # GitHub Actions workflows
-├── .husky/ # Git hooks
-├── e2e/ # Playwright tests
+├── .storybook/ # Storybook configuration
 ├── src/
 │ ├── app/ # Next.js app directory
 │ ├── components/ # React components
+│ │ └── ui/ # UI components with stories
 │ ├── lib/ # Utility functions
-│ ├── mocks/ # MSW handlers
+│ ├── styles/ # Global styles
 │ └── tests/ # Test utilities
+├── e2e/ # Playwright tests
 ├── public/ # Static files
 └── package.json
 \`\`\`
+
+## Component Development Workflow
+
+1. Create component in `src/components/ui/`
+2. Add stories in the same directory
+3. Develop and test in Storybook
+4. Write unit tests
+5. Document usage and props
+6. Submit PR for review
+
+## Git Workflow
+
+This project uses Conventional Commits. To create a commit:
+
+\`\`\`bash
+git add .
+git commit -m "type: description"
+\`\`\`
+
+Types: feat, fix, docs, style, refactor, test, chore
 
 ## Deployment
 
@@ -119,10 +183,11 @@ yarn commit
 ## Contributing
 
 1. Create a feature branch
-2. Commit changes using \`yarn commit\`
-3. Push to the branch
-4. Open a Pull Request
+2. Develop and test your changes
+3. Write or update tests
+4. Update documentation
+5. Submit a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details
