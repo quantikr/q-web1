@@ -1,7 +1,13 @@
 import { ThemeProvider } from '@/components/theme-provider'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
 
 export const metadata: Metadata = {
   title: 'Next.js App with shadcn/ui',
@@ -16,15 +22,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.variable}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <ThemeToggle />
-          {children}
+          <div className="relative min-h-screen">
+            <div className="absolute right-4 top-4 z-50">
+              <ThemeToggle />
+            </div>
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
