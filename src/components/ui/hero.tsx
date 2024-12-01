@@ -1,46 +1,81 @@
-'use client'
+import * as React from 'react'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
 
-import React from 'react'
-import { CtaButton } from './cta-button'
-
-interface HeroProps {
+interface HeroProps extends React.HTMLAttributes<HTMLElement> {
   title: string
-  subtitle: string
-  ctaText?: string
+  description: string
+  ctaText: string
+  onCtaClick?: () => void
+  backgroundImage?: string
 }
 
-export function Hero({ title, subtitle, ctaText = 'Learn more' }: HeroProps) {
-  return (
-    <div className="relative overflow-hidden bg-background">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute right-0 top-0 -translate-y-1/4 translate-x-1/4 transform">
-          <div className="h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        </div>
-        <div className="absolute left-0 bottom-0 translate-y-1/4 -translate-x-1/4 transform">
-          <div className="h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="container-custom relative z-10">
-        <div className="flex min-h-screen-80 flex-col items-center justify-center py-20 text-center">
-          <h1 className="animate-fade-in max-w-4xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
-            {title}
-          </h1>
-          <p className="animate-fade-in mt-6 max-w-2xl text-xl text-muted-foreground [animation-delay:200ms]">
-            {subtitle}
-          </p>
-          {ctaText && (
-            <CtaButton className="animate-fade-in mt-10 px-8 py-3 text-base [animation-delay:400ms]">
-              {ctaText}
-            </CtaButton>
+const Hero = React.forwardRef<HTMLElement, HeroProps>(
+  (
+    {
+      className,
+      title,
+      description,
+      ctaText,
+      onCtaClick,
+      backgroundImage,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <section
+        ref={ref}
+        className={cn(
+          'relative min-h-[600px] w-full overflow-hidden bg-background',
+          className
+        )}
+        {...props}
+      >
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          {backgroundImage && (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="h-full w-full object-cover"
+            />
           )}
-        </div>
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/50" />
 
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
-    </div>
-  )
-}
+          {/* Geometric Shape */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -right-1/4 top-1/2 h-[800px] w-[800px] -translate-y-1/2 transform">
+              <div className="absolute inset-0 border-[3px] border-primary/20 rotate-45" />
+              <div className="absolute inset-2 border-[3px] border-primary/40 rotate-45" />
+              <div className="absolute inset-4 border-[3px] border-primary/60 rotate-45" />
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="container relative z-10 flex h-full min-h-[600px] items-center">
+          <div className="max-w-2xl space-y-8 py-20">
+            <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {title}
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground">
+              {description}
+            </p>
+            <Button
+              onClick={onCtaClick}
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              {ctaText}
+            </Button>
+          </div>
+        </div>
+      </section>
+    )
+  }
+)
+
+Hero.displayName = 'Hero'
+
+export { Hero }

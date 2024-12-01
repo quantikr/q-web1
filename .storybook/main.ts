@@ -20,7 +20,11 @@ function getAbsolutePath(value: string): string {
 const isProduction = process.env.NODE_ENV === 'production'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    './**/*.mdx',
+  ],
   addons: [
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-essentials'),
@@ -37,15 +41,15 @@ const config: StorybookConfig = {
       },
     },
   },
+  docs: {
+    autodocs: true,
+    defaultName: 'Documentation',
+  },
   webpackFinal: async (config: Configuration) => {
-    // Enable filesystem cache
+    // Use memory cache for problematic sources
     config.cache = {
-      type: 'filesystem',
-      cacheDirectory: join(__dirname, '.webpack-cache'),
-      allowCollectingMemory: true,
-      buildDependencies: {
-        config: [__filename],
-      },
+      type: 'memory',
+      maxGenerations: 1,
     }
 
     // Find the rule that handles JavaScript/TypeScript files
@@ -116,8 +120,8 @@ const config: StorybookConfig = {
     check: false,
   },
   core: {
-    disableTelemetry: true, // Disables telemetry for privacy and compliance
-    enableCrashReports: false, // Avoids sending crash reports to Storybook servers
+    disableTelemetry: true,
+    enableCrashReports: false,
   },
 }
 

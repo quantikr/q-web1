@@ -1,23 +1,13 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from './button'
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: 'UI/Button',
   component: Button,
   parameters: {
     layout: 'centered',
-    docs: {
-      description: {
-        component:
-          'A versatile button component with multiple variants and sizes.',
-      },
-    },
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     variant: {
       control: 'select',
@@ -30,25 +20,15 @@ const meta = {
         'link',
       ],
       description: 'The visual style of the button',
-      table: {
-        defaultValue: { summary: 'default' },
-      },
     },
     size: {
       control: 'select',
       options: ['default', 'sm', 'lg', 'icon'],
       description: 'The size of the button',
-      table: {
-        defaultValue: { summary: 'default' },
-      },
     },
     asChild: {
       control: 'boolean',
       description: 'Whether to render as a child component',
-    },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes to apply',
     },
   },
 } satisfies Meta<typeof Button>
@@ -56,83 +36,47 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Default: Story = {
+export const Primary: Story = {
   args: {
-    children: 'Button',
+    children: 'Primary Button',
     variant: 'default',
-    size: 'default',
-  },
-}
-
-export const Destructive: Story = {
-  args: {
-    children: 'Delete',
-    variant: 'destructive',
-  },
-}
-
-export const Outline: Story = {
-  args: {
-    children: 'Outline',
-    variant: 'outline',
   },
 }
 
 export const Secondary: Story = {
   args: {
-    children: 'Secondary',
+    children: 'Secondary Button',
     variant: 'secondary',
   },
 }
 
-export const Ghost: Story = {
+export const Destructive: Story = {
   args: {
-    children: 'Ghost',
-    variant: 'ghost',
+    children: 'Destructive Button',
+    variant: 'destructive',
   },
 }
 
-export const Link: Story = {
-  args: {
-    children: 'Link Button',
-    variant: 'link',
-  },
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Button variant="default">Default Button</Button>
+      <Button variant="secondary">Secondary Button</Button>
+      <Button variant="destructive">Destructive Button</Button>
+      <Button variant="outline">Outline Button</Button>
+      <Button variant="ghost">Ghost Button</Button>
+      <Button variant="link">Link Button</Button>
+    </div>
+  ),
 }
 
-export const Small: Story = {
-  args: {
-    children: 'Small Button',
-    size: 'sm',
-  },
-}
-
-export const Large: Story = {
-  args: {
-    children: 'Large Button',
-    size: 'lg',
-  },
-}
-
-export const Icon: Story = {
-  args: {
-    children: '🔔',
-    size: 'icon',
-  },
-}
-
-// Example of a button with an onClick handler
-export const WithClick: Story = {
-  args: {
-    children: 'Click Me',
-    onClick: () => alert('Button clicked!'),
-  },
-}
-
-// Example of a disabled button
-export const Disabled: Story = {
-  args: {
-    children: 'Disabled Button',
-    disabled: true,
-  },
+export const AllSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Button size="lg">Large Button</Button>
+      <Button size="default">Default Button</Button>
+      <Button size="sm">Small Button</Button>
+      <Button size="icon">🔍</Button>
+    </div>
+  ),
 }

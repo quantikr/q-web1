@@ -4,29 +4,29 @@
 
 @layer base {
   :root {
-    /* Baringa-inspired color palette */
+    /* Quantikr color palette */
     --background: 0 0% 100%; /* White */
-    --foreground: 240 6% 10%; /* Near black for text */
+    --foreground: 224 71% 4%; /* Rich dark blue for text */
 
     --card: 0 0% 100%;
-    --card-foreground: 240 6% 10%;
+    --card-foreground: 224 71% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 6% 10%;
+    --popover-foreground: 224 71% 4%;
 
-    /* Baringa blue */
-    --primary: 220 100% 26%;
+    /* Quantikr signature blue */
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
-    /* Lighter blue for secondary */
-    --secondary: 220 100% 95%;
-    --secondary-foreground: 220 100% 26%;
+    /* Modern tech grey */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 221 83% 53%;
 
     --muted: 220 14% 96%;
-    --muted-foreground: 220 6% 46%;
+    --muted-foreground: 220 8% 46%;
 
-    /* Baringa pink */
-    --accent: 327 100% 45%;
+    /* Quantikr accent color */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -34,43 +34,43 @@
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 220 100% 26%;
+    --ring: 221 83% 53%;
 
-    /* Larger default radius for modern feel */
-    --radius: 0.75rem;
+    /* Clean, modern radius */
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark mode with Baringa colors */
-    --background: 222 47% 11%;
-    --foreground: 0 0% 100%;
+    /* Dark mode */
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 0 0% 100%;
+    --card: 224 71% 4%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
 
-    /* Lighter blue for dark mode */
-    --primary: 220 100% 70%;
-    --primary-foreground: 222 47% 11%;
+    /* Brighter blue for dark mode */
+    --primary: 217 91% 60%;
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 220 47% 17%;
-    --secondary-foreground: 220 100% 70%;
+    --secondary: 215 27% 17%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 220 47% 17%;
-    --muted-foreground: 220 14% 75%;
+    --muted: 215 27% 17%;
+    --muted-foreground: 217 15% 75%;
 
-    /* Brighter pink for dark mode */
-    --accent: 327 100% 55%;
-    --accent-foreground: 0 0% 100%;
+    /* Brighter accent for dark mode */
+    --accent: 221 83% 53%;
+    --accent-foreground: 210 20% 98%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 220 47% 17%;
-    --input: 220 47% 17%;
-    --ring: 220 100% 70%;
+    --border: 215 27% 17%;
+    --input: 215 27% 17%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -81,7 +81,7 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
-  /* Baringa-inspired typography */
+  /* Quantikr typography */
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary;
   }
@@ -99,7 +99,7 @@
   }
 }
 
-/* Baringa-inspired components */
+/* Quantikr components */
 @layer components {
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
