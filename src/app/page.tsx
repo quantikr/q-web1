@@ -1,19 +1,21 @@
-import { Hero } from '@/components/ui/hero'
-import { CtaButton } from '@/components/ui/cta-button'
+import Link from 'next/link'
+import { Hero } from '../components/ui/hero'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
       <Hero
-        title="Transform your digital future with confidence"
-        subtitle="Innovative solutions powered by expertise and deep industry knowledge. Where technology meets strategic excellence."
+        title="WELCOME TO QUANTIKR"
+        subtitle="Driving Change Delivering Value"
+        description="At Quantikr, we blend deep strategic insights with cutting-edge digital innovation. Our bespoke approach to consulting involves a close partnership with each client, crafting tailor-made strategies that not only optimize digital"
+        ctaText="Learn More"
       />
 
       {/* Feature section */}
-      <section className="container-custom py-20">
+      <section className="container mx-auto px-4 py-24">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Feature 1 */}
-          <div className="group rounded-lg border bg-card p-8 transition-colors hover:border-primary">
+          <div className="group rounded-lg border border-primary/10 bg-card p-8 transition-colors hover:border-primary/30">
             <h3 className="text-xl font-semibold text-primary">
               Digital Innovation
             </h3>
@@ -24,7 +26,7 @@ export default function Home() {
           </div>
 
           {/* Feature 2 */}
-          <div className="group rounded-lg border bg-card p-8 transition-colors hover:border-primary">
+          <div className="group rounded-lg border border-primary/10 bg-card p-8 transition-colors hover:border-primary/30">
             <h3 className="text-xl font-semibold text-primary">
               Strategic Consulting
             </h3>
@@ -35,7 +37,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3 */}
-          <div className="group rounded-lg border bg-card p-8 transition-colors hover:border-primary">
+          <div className="group rounded-lg border border-primary/10 bg-card p-8 transition-colors hover:border-primary/30">
             <h3 className="text-xl font-semibold text-primary">
               Sustainable Growth
             </h3>
@@ -48,18 +50,23 @@ export default function Home() {
       </section>
 
       {/* CTA section */}
-      <section className="bg-primary py-20 text-primary-foreground">
-        <div className="container-custom text-center">
+      <section className="bg-gradient-to-br from-primary to-primary/90 py-24 text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
             Ready to start your transformation?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/80">
-            Join leading organizations that have partnered with us to achieve
-            extraordinary results.
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/90">
+            Join leading organizations that have partnered with Quantikr to
+            achieve extraordinary results.
           </p>
-          <CtaButton className="mt-8 px-8 py-3">Get Started</CtaButton>
+          <Link
+            href="/contact"
+            className="mt-8 inline-flex items-center justify-center rounded-md bg-background px-8 py-3 text-lg font-medium text-primary transition-colors hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-background focus:ring-offset-2 focus:ring-offset-primary"
+          >
+            Get Started
+          </Link>
         </div>
       </section>
-    </main>
+    </>
   )
 }

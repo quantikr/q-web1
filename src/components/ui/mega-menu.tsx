@@ -9,10 +9,11 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from './navigation-menu'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import { Button } from './button'
-import { ChevronRight } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 interface MenuItem {
   title: string
@@ -32,98 +33,22 @@ interface MegaMenuProps {
   className?: string
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-ListItem.displayName = 'ListItem'
-
 export function MegaMenu({ items, className }: MegaMenuProps) {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [isMobile, setIsMobile] = React.useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
     }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
 
   return (
-    <div className={cn('relative w-full', className)}>
-      {/* Mobile Menu Button */}
-      <div className="md:hidden">
-        <Button
-          variant="ghost"
-          className="w-full justify-between"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          Menu
-          <ChevronRight
-            className={cn(
-              'h-4 w-4 transition-transform duration-200',
-              isOpen && 'rotate-90'
-            )}
-          />
-        </Button>
-        {/* Mobile Menu Content */}
-        {isOpen && (
-          <div className="absolute left-0 right-0 z-50 mt-2 space-y-2 rounded-md border bg-popover p-4 shadow-lg">
-            {items.map((item, index) => (
-              <div key={index} className="space-y-3">
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    className="block text-sm font-medium text-foreground hover:text-primary"
-                  >
-                    {item.title}
-                  </Link>
-                ) : (
-                  <div className="text-sm font-medium text-foreground">
-                    {item.title}
-                  </div>
-                )}
-                {item.items && (
-                  <div className="ml-4 space-y-2">
-                    {item.items.map((subItem, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={subItem.href}
-                        className="block text-sm text-muted-foreground hover:text-primary"
-                      >
-                        {subItem.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
+    <div className={cn('relative', className)}>
       {/* Desktop Navigation Menu */}
       <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
@@ -133,74 +58,46 @@ export function MegaMenu({ items, className }: MegaMenuProps) {
                 <>
                   <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[800px] grid-cols-[1fr_1fr] gap-3 p-4">
-                      <div className="col-span-1">
-                        {item.description && (
-                          <div className="mb-4 max-w-[320px]">
-                            <h3 className="mb-2 text-lg font-medium">
+                    <div className="fixed inset-0 top-full h-[100vh] w-screen bg-background/95 backdrop-blur-sm" />
+                    <div className="relative border-t bg-background shadow-lg">
+                      <div className="mx-auto w-full max-w-7xl px-8">
+                        <div className="grid gap-8 py-8">
+                          <div>
+                            <h3 className="text-lg font-medium text-primary">
                               {item.title}
                             </h3>
-                            <p className="text-sm text-muted-foreground">
-                              {item.description}
-                            </p>
+                            {item.description && (
+                              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                {item.description}
+                              </p>
+                            )}
                           </div>
-                        )}
-                        <ul className="grid grid-cols-1 gap-3">
-                          {item.items
-                            .filter(subItem => !subItem.description)
-                            .map((subItem, subIndex) => (
-                              <ListItem
+                          <div className="grid grid-cols-4 gap-6">
+                            {item.items.map((subItem, subIndex) => (
+                              <Link
                                 key={subIndex}
-                                title={subItem.title}
                                 href={subItem.href}
+                                className="group block space-y-2 rounded-lg p-4 transition-colors hover:bg-accent"
                               >
-                                {subItem.description}
-                              </ListItem>
-                            ))}
-                        </ul>
-                      </div>
-                      {item.items.some(subItem => subItem.description) && (
-                        <div className="col-span-1 grid grid-cols-1 gap-3">
-                          {item.items
-                            .filter(subItem => subItem.description)
-                            .map((subItem, subIndex) => (
-                              <div
-                                key={subIndex}
-                                className="group relative overflow-hidden rounded-md border p-4 hover:border-primary"
-                              >
-                                {subItem.icon && (
-                                  <div className="mb-2 text-primary">
-                                    {subItem.icon}
-                                  </div>
-                                )}
-                                <h4 className="mb-1 text-sm font-medium">
+                                <div className="text-sm font-medium leading-none group-hover:text-accent-foreground">
                                   {subItem.title}
-                                </h4>
-                                <p className="text-sm text-muted-foreground">
-                                  {subItem.description}
-                                </p>
-                                <Link
-                                  href={subItem.href}
-                                  className="absolute inset-0"
-                                >
-                                  <span className="sr-only">
-                                    Learn more about {subItem.title}
-                                  </span>
-                                </Link>
-                              </div>
+                                </div>
+                                {subItem.description && (
+                                  <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                                    {subItem.description}
+                                  </p>
+                                )}
+                              </Link>
                             ))}
+                          </div>
                         </div>
-                      )}
+                      </div>
                     </div>
                   </NavigationMenuContent>
                 </>
               ) : (
                 <Link href={item.href || '#'} legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={cn(
-                      'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
-                    )}
-                  >
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.title}
                   </NavigationMenuLink>
                 </Link>
@@ -209,6 +106,64 @@ export function MegaMenu({ items, className }: MegaMenuProps) {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
+
+      {/* Mobile Menu */}
+      <div className="flex md:hidden">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative z-[60]"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isMobileMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
+        </Button>
+
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div className="fixed inset-0 top-0 z-[50] bg-background/80 backdrop-blur-sm" />
+
+            {/* Menu Content */}
+            <div className="fixed inset-x-0 top-16 z-[55] h-[calc(100vh-4rem)] overflow-y-auto bg-background">
+              <div className="container py-6">
+                <nav className="space-y-6">
+                  {items.map((item, index) => (
+                    <div key={index} className="space-y-3">
+                      <div className="font-medium text-lg text-foreground">
+                        {item.title}
+                      </div>
+                      {item.items && (
+                        <div className="grid gap-2 pl-4">
+                          {item.items.map((subItem, subIndex) => (
+                            <Link
+                              key={subIndex}
+                              href={subItem.href}
+                              className="block p-2 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              <div className="font-medium">{subItem.title}</div>
+                              {subItem.description && (
+                                <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">
+                                  {subItem.description}
+                                </p>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }

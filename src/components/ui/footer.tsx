@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { cn } from '../../lib/utils'
 import Link from 'next/link'
+import { cn } from '../../lib/utils'
 import { Twitter, Linkedin, Github } from 'lucide-react'
 
 interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
@@ -22,7 +22,8 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
             <div className="space-y-4">
               <h3 className="text-lg font-bold">Quantikr</h3>
               <p className="text-sm text-muted-foreground">
-                Advancing quantum computing technology for a better future.
+                Driving digital transformation with innovative solutions and
+                deep expertise.
               </p>
               <div className="flex space-x-4">
                 <Link
@@ -49,24 +50,65 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
               </div>
             </div>
 
-            {/* Solutions */}
+            {/* Services & Solutions */}
             <div className="space-y-4">
               <h4 className="text-sm font-semibold uppercase tracking-wider">
-                Solutions
+                Services & Solutions
               </h4>
               <ul className="space-y-2">
                 {[
-                  'Quantum Computing',
-                  'Machine Learning',
-                  'Data Analytics',
-                  'Enterprise Solutions',
+                  {
+                    label: 'Digital Transformation',
+                    href: '/services#digital-transformation',
+                  },
+                  {
+                    label: 'Cloud Solutions',
+                    href: '/services#cloud-solutions',
+                  },
+                  { label: 'Data Analytics', href: '/services#data-analytics' },
+                  {
+                    label: 'Enterprise Solutions',
+                    href: '/solutions#enterprise',
+                  },
+                  {
+                    label: 'Consulting Services',
+                    href: '/services#consulting',
+                  },
                 ].map(item => (
-                  <li key={item}>
+                  <li key={item.href}>
                     <Link
-                      href={`/solutions/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={item.href}
                       className="text-sm text-muted-foreground hover:text-primary"
                     >
-                      {item}
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Industries */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold uppercase tracking-wider">
+                Industries
+              </h4>
+              <ul className="space-y-2">
+                {[
+                  {
+                    label: 'Financial Services',
+                    href: '/industries#financial-services',
+                  },
+                  { label: 'Healthcare', href: '/industries#healthcare' },
+                  { label: 'Manufacturing', href: '/industries#manufacturing' },
+                  { label: 'Retail', href: '/industries#retail' },
+                  { label: 'Public Sector', href: '/industries#public-sector' },
+                ].map(item => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-primary"
+                    >
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -79,37 +121,18 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
                 Company
               </h4>
               <ul className="space-y-2">
-                {['About', 'Careers', 'Research', 'Contact'].map(item => (
-                  <li key={item}>
-                    <Link
-                      href={`/${item.toLowerCase()}`}
-                      className="text-sm text-muted-foreground hover:text-primary"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div className="space-y-4">
-              <h4 className="text-sm font-semibold uppercase tracking-wider">
-                Legal
-              </h4>
-              <ul className="space-y-2">
                 {[
-                  'Privacy Policy',
-                  'Terms of Service',
-                  'Cookie Policy',
-                  'Accessibility',
+                  { label: 'About Us', href: '/about' },
+                  { label: 'Careers', href: '/careers' },
+                  { label: 'Insights', href: '/insights' },
+                  { label: 'Contact', href: '/contact' },
                 ].map(item => (
-                  <li key={item}>
+                  <li key={item.href}>
                     <Link
-                      href={`/legal/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={item.href}
                       className="text-sm text-muted-foreground hover:text-primary"
                     >
-                      {item}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -125,17 +148,17 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
               </p>
               <div className="flex items-center space-x-4">
                 <Link
-                  href="/sitemap"
+                  href="/privacy-policy"
                   className="text-sm text-muted-foreground hover:text-primary"
                 >
-                  Sitemap
+                  Privacy Policy
                 </Link>
                 <span className="text-muted-foreground/40">|</span>
                 <Link
-                  href="/preferences"
+                  href="/terms-of-service"
                   className="text-sm text-muted-foreground hover:text-primary"
                 >
-                  Cookie Preferences
+                  Terms of Service
                 </Link>
               </div>
             </div>

@@ -1,5 +1,7 @@
-import { ThemeProvider } from '@/components/theme-provider'
-import { ThemeToggle } from '@/components/theme-toggle'
+import { ThemeProvider } from '../components/theme-provider'
+import { ThemeToggle } from '../components/theme-toggle'
+import { Header } from '../components/ui/header'
+import { Footer } from '../components/ui/footer'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
@@ -10,9 +12,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Next.js App with shadcn/ui',
+  title: 'Quantikr - Advanced Digital Solutions',
   description:
-    'Modern Next.js application with TypeScript, Tailwind, and shadcn/ui',
+    'Transform your digital future with Quantikr. Innovative solutions powered by expertise and deep industry knowledge.',
 }
 
 export default function RootLayout({
@@ -30,10 +32,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative min-h-screen">
-            <div className="absolute right-4 top-4 z-50">
-              <ThemeToggle />
-            </div>
-            {children}
+            <Header />
+            <main>{children}</main>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
