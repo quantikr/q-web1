@@ -11847,7 +11847,7 @@ __metadata:
     react: 19.2.3
     react-dom: 19.2.3
     shadcn-ui: ^0.9.5
-    storybook: ^10.1.8
+    storybook: ^10.1.10
     tailwind-merge: ^3.4.0
     tailwindcss: ^4.1.18
     tailwindcss-animate: ^1.0.7
@@ -14111,9 +14111,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^10.1.8":
-  version: 10.1.8
-  resolution: "storybook@npm:10.1.8"
+"storybook@npm:^10.1.10":
+  version: 10.1.10
+  resolution: "storybook@npm:10.1.10"
   dependencies:
     "@storybook/global": ^5.0.0
     "@storybook/icons": ^2.0.0
@@ -14134,7 +14134,7 @@ __metadata:
       optional: true
   bin:
     storybook: ./dist/bin/dispatcher.js
-  checksum: 5196de1cfddc1699fc95996f24fff60b498cc0fa2158be1a923b2649e274abbccf3de6653e7f1a15681996e597d8fbe96140c0cb0f88e1195c13cba0ac604c3f
+  checksum: 1f1cdc662ffdfbf13e8eefb65393ed6085d3ae05623ae520cfeb0910521a9d087e83a08a181589fa48202590cf995e7eb7b7b14e9d55cb327b4b9755a83edf6e
   languageName: node
   linkType: hard
 
